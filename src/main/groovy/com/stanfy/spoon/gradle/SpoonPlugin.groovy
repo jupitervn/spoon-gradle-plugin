@@ -63,6 +63,7 @@ class SpoonPlugin implements Plugin<Project> {
                                     title = "$project.name $targetVariantName"
                                     description = "Runs instrumentation tests on all the connected devices for '${targetVariantName}' variation and generates a report with screenshots"
                                 }
+                                spoonTask.dependsOn spoonRunTask
 
                             }
                         }
