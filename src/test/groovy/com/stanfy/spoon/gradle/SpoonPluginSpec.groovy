@@ -38,4 +38,12 @@ class SpoonPluginSpec extends Specification {
     p.spoon
   }
 
+  def "can be applied to test application"() {
+    when:
+    Project p = ProjectBuilder.builder().build()
+    p.apply plugin: 'com.android.test'
+    p.apply plugin: 'spoon'
+    then:
+    p.spoon
+  }
 }
