@@ -35,6 +35,7 @@ class SpoonPlugin implements Plugin<Project> {
             group = JavaBasePlugin.VERIFICATION_GROUP
             description = "Runs all the instrumentation test variations on all the connected devices"
         }
+        BaseExtension android = project.android
         if (isTestPlugin(project)) {
             TestExtension testExtension = project.android
             def targetVariantName = testExtension.targetVariant
@@ -70,7 +71,6 @@ class SpoonPlugin implements Plugin<Project> {
             }
 
         } else {
-            BaseExtension android = project.android
             android.testVariants.all { TestVariant variant ->
 
                 String taskName = "${TASK_PREFIX}${variant.name.capitalize()}"
