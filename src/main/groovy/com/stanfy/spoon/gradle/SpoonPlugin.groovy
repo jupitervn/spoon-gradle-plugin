@@ -100,22 +100,21 @@ class SpoonPlugin implements Plugin<Project> {
                 }
             }
 
-        }
-        project.tasks.addRule(patternString("spoon")) { String ruleTaskName ->
-            if (ruleTaskName.startsWith("spoon")) {
-                String suffix = lowercase(ruleTaskName - "spoon")
-                if (android.testVariants.find { suffix.startsWith(it.name) } != null) {
-                    // variant specific, not our case
-                    return
-                }
-                String size = suffix.toLowerCase(Locale.US)
-                if (isValidSize(size)) {
-                    def variantTaskNames = spoonTask.taskDependencies.getDependencies(spoonTask).collect() { it.name }
-                    project.task(ruleTaskName, dependsOn: variantTaskNames.collect() { "${it}${size.capitalize()}" })
+            project.tasks.addRule(patternString("spoon")) { String ruleTaskName ->
+                if (ruleTaskName.startsWith("spoon")) {
+                    String suffix = lowercase(ruleTaskName - "spoon")
+                    if (android.testVariants.find { suffix.startsWith(it.name) } != null) {
+                        // variant specific, not our case
+                        return
+                    }
+                    String size = suffix.toLowerCase(Locale.US)
+                    if (isValidSize(size)) {
+                        def variantTaskNames = spoonTask.taskDependencies.getDependencies(spoonTask).collect() { it.name }
+                        project.task(ruleTaskName, dependsOn: variantTaskNames.collect() { "${it}${size.capitalize()}" })
+                    }
                 }
             }
         }
-
     }
 
     private boolean isTestPlugin(Project project) {
