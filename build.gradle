@@ -38,13 +38,13 @@ dependencies {
  
  apply plugin: 'maven'
 
-  uploadArchives {
-      repositories {
-          mavenDeployer {
-              repository(url: uri('archives'))
-          }
-      }
-  }
+//  uploadArchives {
+//      repositories {
+//          mavenDeployer {
+//              repository(url: uri('archives'))
+//          }
+//      }
+//  }
 
 
 task integrationTest(type: GradleBuild, dependsOn: ['check', 'install']) {
